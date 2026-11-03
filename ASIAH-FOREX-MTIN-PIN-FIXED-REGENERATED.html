@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASIAH FOREX - Licensed Money Services Business</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            850: '#1e293b',
+                            900: '#002b66',
+                            950: '#00193d'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Share+Tech+Mono&display=swap');
+        
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Plus Jakarta Sans", sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .font-mono-tech { font-family: 'Share Tech Mono', ui-monospace, monospace; }
+
+        /* Apple HIG Touch Standard */
+        button, a, input, select {
+            touch-action: manipulation;
+            min-height: 44px;
+        }
+
+        button:active, .btn-touch:active {
+            transform: scale(0.96);
+            transition: transform 120ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .apple-glass {
+            background: rgba(0, 43, 102, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .tv-board-bg {
+            background: linear-gradient(135deg, #021536 0%, #002b66 50%, #00122e 100%);
+        }
+
+        .auto-font-input { transition: font-size 150ms ease-in-out; }
+        :focus-visible { outline: 3px solid #fbbf24; outline-offset: 3px; }
+        button, input, select { transition: border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease; }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+        }
+        @media print {
+            body { background: white !important; color: black !important; padding: 0 !important; }
+            header, body > div:first-child, #tab-tvboard, #tab-send, #tab-rates, #tab-ledger,
+            #admin-auth-modal, #change-pwd-modal, #receipt-modal, .md\\:hidden { display: none !important; }
+            #tab-audit { display: block !important; }
+            main { max-width: none !important; padding: 0 !important; }
+            #tab-audit .bg-brand-900\\/80, #tab-audit .bg-slate-950\\/80 { background: white !important; color: black !important; box-shadow: none !important; border: 0 !important; }
+            #tab-audit table { color: black !important; }
+        }
+    </style>
+</head>
+<body class="bg-brand-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-amber-500 selection:text-white pb-20 md:pb-0">
+
+    <!-- Header Ticker Banner -->
+    <div class="bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 text-brand-950 font-bold text-[11px] py-2 px-4 text-center tracking-wide border-b border-amber-400 shadow-md flex flex-wrap justify-center items-center gap-x-6 gap-y-1">
+        <span><i class="fa-solid fa-building mr-1"></i>HQ: <strong>ASIAH BTE.AB.HAMID SDN BHD (580077-X)</strong> — No.30, JALAN SULTAN AZLAN SHAH, 51200 KL (TEL: 03-4045 1000)</span>
+        <span class="hidden md:inline">|</span>
+        <span><i class="fa-solid fa-store mr-1"></i>BRANCH: <strong>74-1 GROUND FLOOR, JALAN PUTRA, KL-50350</strong> (TEL: 03-4051 3030)</span>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 apple-glass border-b border-blue-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 via-amber-500 to-amber-600 p-0.5 shadow-lg shadow-amber-500/30 flex items-center justify-center relative overflow-hidden">
+                    <div class="w-full h-full bg-brand-950 rounded-[14px] flex items-center justify-center relative">
+                        <div class="relative z-10 text-amber-400 flex flex-col items-center justify-center">
+                            <i class="fa-solid fa-layer-group text-sm -mb-1"></i>
+                            <i class="fa-solid fa-coins text-base"></i>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <span class="text-2xl font-black tracking-tight text-amber-400">ASIAH FOREX</span>
+                    <span class="text-xs block text-slate-300 font-medium">LICENSED MONEY SERVICES BUSINESS • Money Changing Service</span>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-1">
+                <button onclick="switchTab('tvboard')" id="nav-tvboard" class="px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 text-brand-950 transition-all shadow-md btn-touch flex items-center">
+                    <i class="fa-solid fa-tv mr-2"></i>TV Rate Board
+                </button>
+                <button onclick="switchTab('send')" id="nav-send" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-blue-900/40 transition-all btn-touch flex items-center">
+                    <i class="fa-solid fa-calculator mr-2 text-amber-400"></i>Calculator
+                </button>
+
+                <span class="text-slate-600 px-2">|</span>
+
+                <!-- Protected Admin Links -->
+                <button onclick="attemptAdminAccess('rates')" id="nav-rates" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-blue-900/40 transition-all btn-touch flex items-center">
+                    <i class="fa-solid fa-lock mr-1.5"></i>Rate Manager
+                </button>
+                <button onclick="attemptAdminAccess('ledger')" id="nav-ledger" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-blue-900/40 transition-all btn-touch flex items-center">
+                    <i class="fa-solid fa-lock mr-1.5"></i>Order Ledger
+                </button>
+                <button onclick="attemptAdminAccess('audit')" id="nav-audit" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-blue-900/40 transition-all btn-touch flex items-center">
+                    <i class="fa-solid fa-shield-halved mr-1.5"></i>Audit Console
+                </button>
+            </nav>
+
+            <div class="flex items-center space-x-3">
+                <button id="admin-status-badge" onclick="toggleAdminAuthModal()" class="text-xs bg-slate-800/80 text-slate-300 hover:bg-slate-700 px-3.5 py-2 rounded-full border border-slate-700 flex items-center gap-2 transition-colors btn-touch">
+                    <i class="fa-solid fa-user-shield text-amber-400"></i>
+                    <span id="admin-status-text">Admin Login</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Bottom Navigation -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-brand-900/95 backdrop-blur-md border-t border-blue-900/50 flex justify-around p-2 text-xs">
+        <button onclick="switchTab('tvboard')" id="mob-nav-tvboard" class="text-amber-400 font-semibold p-2 btn-touch flex flex-col items-center"><i class="fa-solid fa-tv text-lg mb-1"></i>TV Board</button>
+        <button onclick="switchTab('send')" id="mob-nav-send" class="text-slate-400 p-2 btn-touch flex flex-col items-center"><i class="fa-solid fa-calculator text-lg mb-1"></i>Calc</button>
+        <button onclick="attemptAdminAccess('rates')" id="mob-nav-rates" class="text-slate-400 p-2 btn-touch flex flex-col items-center"><i class="fa-solid fa-lock text-lg mb-1"></i>Rates</button>
+        <button onclick="attemptAdminAccess('ledger')" id="mob-nav-ledger" class="text-slate-400 p-2 btn-touch flex flex-col items-center"><i class="fa-solid fa-lock text-lg mb-1"></i>Ledger</button>
+        <button onclick="attemptAdminAccess('audit')" id="mob-nav-audit" class="text-slate-400 p-2 btn-touch flex flex-col items-center"><i class="fa-solid fa-shield-halved text-lg mb-1"></i>Audit</button>
+    </div>
+
+    <!-- Main Workspace -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- TAB 1: DIGITAL TV BOARD -->
+        <section id="tab-tvboard" class="space-y-4">
+            <div class="tv-board-bg border-4 border-slate-800 rounded-3xl p-6 shadow-2xl text-white relative">
+                <div class="flex flex-col md:flex-row justify-between items-center border-b-2 border-amber-500/40 pb-4 mb-6">
+                    <div>
+                        <h1 class="text-xl md:text-2xl font-black text-amber-400 tracking-wider uppercase">ASIAH BTE. AB. HAMID SDN. BHD. <span class="text-xs font-normal text-slate-300">(580077-X)</span></h1>
+                        <p class="text-xs text-emerald-400 font-bold tracking-widest uppercase">LICENSED MONEY SERVICES BUSINESS • Money Changing Service</p>
+                    </div>
+                    <div class="text-right font-mono-tech mt-2 md:mt-0">
+                        <div class="text-amber-400 text-xl font-bold" id="tv-clock-date">--</div>
+                        <div class="text-xs text-slate-300">JALAN PUTRA BRANCH COUNTER DISPLAY</div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="text-amber-400 border-b border-amber-500/30 font-bold text-xs md:text-sm">
+                                    <th class="pb-2">Currency</th><th class="pb-2 text-center">Unit</th><th class="pb-2 text-right text-emerald-400">We Buy</th><th class="pb-2 text-right text-amber-300">We Sell</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tv-grid-col1" class="divide-y divide-blue-900/40 font-mono-tech text-sm md:text-base font-bold"></tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="text-amber-400 border-b border-amber-500/30 font-bold text-xs md:text-sm">
+                                    <th class="pb-2">Currency</th><th class="pb-2 text-center">Unit</th><th class="pb-2 text-right text-emerald-400">We Buy</th><th class="pb-2 text-right text-amber-300">We Sell</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tv-grid-col2" class="divide-y divide-blue-900/40 font-mono-tech text-sm md:text-base font-bold"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="mt-8 pt-4 border-t border-amber-500/40 text-center font-bold text-amber-400 text-xs md:text-sm tracking-wide">
+                    Rate is subject to changes without prior notice
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: CALCULATOR -->
+        <section id="tab-send" class="hidden space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="bg-brand-900/80 border border-blue-900/60 rounded-3xl p-6 shadow-2xl relative overflow-hidden">
+                        
+                        <div class="flex flex-col sm:flex-row items-center justify-between mb-5 border-b border-blue-900/40 pb-4 gap-3">
+                            <h2 class="text-lg font-bold text-white flex items-center">
+                                <i class="fa-solid fa-right-left text-amber-400 mr-2.5"></i>Money Exchange Calculator
+                            </h2>
+                            <select id="calc-trade-type" onchange="calculateFromSend()" class="bg-amber-500 text-brand-950 font-bold text-xs rounded-xl px-3 py-2 focus:outline-none cursor-pointer shadow-sm btn-touch">
+                                <option value="WE_SELL">CUSTOMER BUYS (WE SELL)</option>
+                                <option value="WE_BUY">CUSTOMER SELLS (WE BUY)</option>
+                            </select>
+                        </div>
+
+                        <!-- Box 1 -->
+                        <div class="bg-slate-950 border border-slate-800/80 rounded-2xl p-4.5 mb-2 focus-within:border-amber-400 transition-colors">
+                            <div class="flex justify-between text-xs text-slate-400 mb-2 font-medium">
+                                <span>You Give / Deposit</span>
+                                <span class="text-amber-400 font-semibold">Source Currency</span>
+                            </div>
+                            <div class="flex items-center justify-between gap-3">
+                                <div class="flex items-center w-full overflow-hidden">
+                                    <span id="base-flag" class="text-2xl font-bold mr-3 flex-shrink-0">🇲🇾</span>
+                                    <input type="number" id="send-amount" value="1000" min="0" step="any" oninput="adjustFontSize(this); calculateFromSend();" class="auto-font-input w-full bg-transparent text-3xl font-extrabold text-white focus:outline-none font-mono">
+                                </div>
+                                <select id="send-currency" onchange="calculateFromSend()" class="bg-brand-950 text-amber-400 font-bold text-sm rounded-xl px-3 py-2.5 border border-blue-900 focus:outline-none cursor-pointer flex-shrink-0">
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Swap Button -->
+                        <div class="flex justify-center -my-3.5 relative z-10">
+                            <button onclick="swapCurrencies()" class="w-10 h-10 rounded-full bg-amber-500 hover:bg-amber-400 text-brand-950 font-bold flex items-center justify-center shadow-lg transition-transform active:scale-90 btn-touch">
+                                <i class="fa-solid fa-right-left text-sm"></i>
+                            </button>
+                        </div>
+
+                        <!-- Box 2 -->
+                        <div class="bg-slate-950 border border-slate-800/80 rounded-2xl p-4.5 mt-2 focus-within:border-emerald-400 transition-colors">
+                            <div class="flex justify-between text-xs text-slate-400 mb-2 font-medium">
+                                <span>Recipient Receives</span>
+                                <span class="text-emerald-400 font-semibold">Target Currency</span>
+                            </div>
+                            <div class="flex items-center justify-between gap-3">
+                                <div class="flex items-center w-full overflow-hidden">
+                                    <span id="target-flag" class="text-2xl font-bold mr-3 flex-shrink-0">🇵🇭</span>
+                                    <input type="number" id="receive-amount" min="0" step="any" oninput="adjustFontSize(this); calculateFromReceive();" class="auto-font-input w-full bg-transparent text-3xl font-extrabold text-emerald-400 focus:outline-none font-mono">
+                                </div>
+                                <select id="receive-currency" onchange="calculateFromSend()" class="bg-brand-950 text-white font-semibold text-sm rounded-xl px-3 py-2.5 border border-blue-900 focus:outline-none cursor-pointer flex-shrink-0">
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Rate Banner -->
+                        <div class="mt-5 p-4 bg-blue-950/80 border-l-4 border-amber-400 rounded-r-2xl space-y-2">
+                            <div class="flex items-center justify-between text-xs">
+                                <span class="font-semibold text-slate-300 uppercase tracking-wider">Board Exchange Rate</span>
+                                <span class="text-amber-400 font-mono font-bold flex items-center gap-1"><i class="fa-solid fa-lock"></i>Counter Locked</span>
+                            </div>
+                            <div class="text-base font-bold text-white font-mono" id="live-rate-display">1 Base = --</div>
+                            <div class="flex justify-between items-center pt-2 border-t border-blue-900/50 text-xs">
+                                <span class="text-slate-400">Cash Counter Pickup:</span>
+                                <strong class="text-amber-400 font-semibold">74-1 GROUND FLOOR, JALAN PUTRA, KL</strong>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Booking Panel -->
+                <div class="lg:col-span-5">
+                    <div class="bg-brand-900/80 border border-blue-900/60 rounded-3xl p-6 shadow-2xl space-y-4">
+                        <h2 class="text-lg font-bold border-b border-blue-900/40 pb-3 text-white flex items-center">
+                            <i class="fa-solid fa-paper-plane text-amber-400 mr-2.5"></i>Book Counter Cash Pickup
+                        </h2>
+
+                        <div class="space-y-3.5">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-300 mb-1">Customer / Sender Full Name</label>
+                                <input type="text" id="sender-name" placeholder="e.g. John Doe" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-white focus:border-amber-400 focus:outline-none">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-medium text-slate-300 mb-1">Recipient Legal Name (ID/Passport)</label>
+                                <input type="text" id="rec-name" placeholder="e.g. Maria Santos" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-white focus:border-amber-400 focus:outline-none">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-medium text-slate-300 mb-1">Recipient Mobile Contact</label>
+                                <input type="text" id="rec-phone" placeholder="+60 12 345 6789" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-white focus:border-amber-400 focus:outline-none">
+                            </div>
+
+                            <div class="bg-slate-950 border border-amber-500/30 rounded-2xl p-3.5 space-y-2">
+                                <label class="block text-xs font-semibold text-amber-400 flex items-center justify-between">
+                                    <span><i class="fa-solid fa-key mr-1.5"></i>Set 6-Digit MTIN Pickup PIN</span>
+                                </label>
+                                <input type="password" maxlength="6" id="mtin-pin" placeholder="Enter 6-Digit PIN" class="w-full bg-brand-950 border border-slate-700 rounded-xl px-3 py-2.5 text-center text-xl font-extrabold text-amber-400 tracking-widest focus:border-amber-400 focus:outline-none font-mono">
+                            </div>
+                        </div>
+
+                        <button onclick="generateOrderVoucher()" class="w-full mt-4 bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-brand-950 font-extrabold py-4 rounded-2xl shadow-xl transition-all flex items-center justify-center btn-touch">
+                            <i class="fa-solid fa-receipt mr-2"></i>Generate Official Voucher
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TAB 3 (ADMIN): RATE MANAGER -->
+        <section id="tab-rates" class="hidden space-y-6">
+            <div class="bg-brand-900/80 border border-blue-900/60 rounded-3xl p-6 shadow-2xl">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6 border-b border-blue-900/40 pb-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-white flex items-center"><i class="fa-solid fa-sliders text-amber-400 mr-2"></i>Board Rate & Custom Buy/Sell Manager</h2>
+                        <p class="text-xs text-slate-400 mt-1">Set custom rates, units, and buy/sell values for counter operations and TV display screens.</p>
+                    </div>
+                    <button onclick="saveAllBoardRates()" class="bg-amber-500 hover:bg-amber-400 text-brand-950 font-bold text-xs px-4 py-2.5 rounded-xl btn-touch shadow-lg flex items-center gap-1.5"><i class="fa-solid fa-floppy-disk"></i>Save & Publish All Rates</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="border-b border-blue-900/60 text-slate-400 uppercase">
+                                <th class="p-3">Currency Pair / Name</th><th class="p-3 text-center">Unit</th><th class="p-3 text-emerald-400">We Buy (MYR)</th><th class="p-3 text-amber-300">We Sell (MYR)</th><th class="p-3 text-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rate-manager-body" class="divide-y divide-slate-800"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4 (ADMIN): ORDER LEDGER (STARTS CLEAN/EMPTY) -->
+        <section id="tab-ledger" class="hidden space-y-6">
+            <div class="bg-brand-900/80 border border-blue-900/60 rounded-3xl p-6 shadow-2xl">
+                <div class="flex items-center justify-between mb-4 pb-3 border-b border-blue-900/40">
+                    <h2 class="text-xl font-bold text-white flex items-center"><i class="fa-solid fa-receipt text-amber-400 mr-2.5"></i>Money Exchange Order Ledger</h2>
+                    <span class="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3 py-1.5 rounded-full font-mono">Authenticated Admin</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="border-b border-blue-900/60 text-slate-400 uppercase">
+                                <th class="p-3">Ref Code</th><th class="p-3">Sender</th><th class="p-3">Recipient</th><th class="p-3">Deposit</th><th class="p-3">Payout FX</th><th class="p-3 min-w-[150px]">MTIN PICKUP PIN</th><th class="p-3">Status</th><th class="p-3 text-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ledger-table-body" class="divide-y divide-slate-800"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5 (ADMIN): FULL AUDIT CONSOLE & REPORTING SUITE -->
+        <section id="tab-audit" class="hidden space-y-6">
+            <div class="bg-brand-900/80 border border-blue-900/60 rounded-3xl p-6 shadow-2xl space-y-6">
+                
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-blue-900/40 pb-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-white flex items-center">
+                            <i class="fa-solid fa-shield-halved text-amber-400 mr-2.5"></i>BNM AML/CFT Compliance Audit Console
+                        </h2>
+                        <p class="text-xs text-slate-400 mt-1">Full activity logging, statutory compliance reports, and timeframe filters.</p>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button onclick="printAuditSummaryReport()" class="bg-slate-800 hover:bg-slate-700 text-xs px-3.5 py-2.5 rounded-xl text-amber-400 border border-amber-500/30 font-bold btn-touch flex items-center gap-1.5">
+                            <i class="fa-solid fa-print"></i>Print Summary
+                        </button>
+                        <button onclick="exportAuditReportPDF()" class="bg-amber-500 hover:bg-amber-400 text-brand-950 font-extrabold text-xs px-3.5 py-2.5 rounded-xl shadow-md btn-touch flex items-center gap-1.5">
+                            <i class="fa-solid fa-file-pdf"></i>Generate PDF Report
+                        </button>
+                        <button onclick="exportAuditCSV()" class="bg-blue-900/60 hover:bg-blue-800 text-xs px-3 py-2.5 rounded-xl text-white font-bold btn-touch flex items-center gap-1.5">
+                            <i class="fa-solid fa-file-csv"></i>Export CSV
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Full Calendar & Period Selection Bar -->
+                <div class="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 space-y-3">
+                    <div class="flex flex-wrap items-center justify-between gap-3 text-xs">
+                        <div class="flex items-center gap-2">
+                            <span class="text-slate-400 font-medium">Quick Preset Period:</span>
+                            <button onclick="setAuditPeriod('daily')" class="px-3 py-1.5 bg-brand-950 hover:bg-blue-900/50 border border-blue-900 rounded-lg text-amber-400 font-bold btn-touch">Daily</button>
+                            <button onclick="setAuditPeriod('weekly')" class="px-3 py-1.5 bg-brand-950 hover:bg-blue-900/50 border border-blue-900 rounded-lg text-amber-400 font-bold btn-touch">Weekly</button>
+                            <button onclick="setAuditPeriod('monthly')" class="px-3 py-1.5 bg-brand-950 hover:bg-blue-900/50 border border-blue-900 rounded-lg text-amber-400 font-bold btn-touch">Monthly</button>
+                            <button onclick="setAuditPeriod('annual')" class="px-3 py-1.5 bg-brand-950 hover:bg-blue-900/50 border border-blue-900 rounded-lg text-amber-400 font-bold btn-touch">Annual</button>
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                            <span class="text-slate-400 font-medium">Event Type:</span>
+                            <select id="audit-filter-event" onchange="renderAudit()" class="bg-brand-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white">
+                                <option value="ALL">All Compliance Events</option>
+                                <option value="BOOKING_CREATED">Booking Created</option>
+                                <option value="ORDER_CANCELLED">Order Cancelled</option>
+                                <option value="RATE_CHANGE">Board Rate Modified</option>
+                                <option value="SECURITY_EVENT">Security Log</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Date Picker Range -->
+                    <div class="flex flex-wrap items-center gap-4 text-xs pt-2 border-t border-slate-800">
+                        <div class="flex items-center gap-2">
+                            <label class="text-slate-400">Start Date:</label>
+                            <input type="date" id="audit-start-date" onchange="renderAudit()" class="bg-brand-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-white">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <label class="text-slate-400">End Date:</label>
+                            <input type="date" id="audit-end-date" onchange="renderAudit()" class="bg-brand-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-white">
+                        </div>
+                        <button onclick="resetAuditFilters()" class="text-amber-400 hover:underline text-xs">Reset Filters</button>
+                    </div>
+                </div>
+
+                <!-- Audit Log Table -->
+                <div class="overflow-x-auto max-h-[400px]">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="sticky top-0 bg-brand-900 border-b border-blue-900/60 text-xs text-slate-400 uppercase">
+                            <tr><th class="p-3">Timestamp</th><th class="p-3">Log ID</th><th class="p-3">Event Type</th><th class="p-3">Details & Parameters</th></tr>
+                        </thead>
+                        <tbody id="audit-table-body" class="divide-y divide-slate-800 text-xs font-mono"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ADMIN LOGIN MODAL -->
+    <div id="admin-auth-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center hidden p-4">
+        <div class="bg-brand-900 border border-blue-900 rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4">
+            <h3 class="text-lg font-bold text-white flex items-center"><i class="fa-solid fa-lock text-amber-400 mr-2"></i>Admin Authentication</h3>
+            <p class="text-xs text-slate-300">Enter administrator password to access protected management consoles.</p>
+            
+            <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">Admin Password</label>
+                <input type="password" id="admin-password-input" placeholder="Enter Password" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+            </div>
+
+            <div class="flex items-center justify-between text-xs pt-1">
+                <button onclick="openChangePasswordModal()" class="text-amber-400 hover:underline"><i class="fa-solid fa-key mr-1"></i>Change Password</button>
+                <button onclick="handleForgotPassword()" class="text-slate-400 hover:underline">Forgot Password?</button>
+            </div>
+
+            <div class="flex justify-end gap-2 pt-2 border-t border-blue-900/50">
+                <button onclick="closeAdminAuthModal()" class="px-4 py-2 bg-slate-800 text-xs rounded-xl text-slate-300 btn-touch">Cancel</button>
+                <button onclick="validateAdminPassword()" class="px-4 py-2 bg-amber-500 text-xs font-bold rounded-xl text-brand-950 btn-touch">Unlock Portal</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHANGE PASSWORD MODAL -->
+    <div id="change-pwd-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center hidden p-4">
+        <div class="bg-brand-900 border border-blue-900 rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4">
+            <h3 class="text-lg font-bold text-white"><i class="fa-solid fa-key text-amber-400 mr-2"></i>Change Admin Password</h3>
+            <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">Current Password</label>
+                <input type="password" id="cp-current" placeholder="Current Password" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-sm text-white">
+            </div>
+            <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">New Password (Min 6 chars)</label>
+                <input type="password" id="cp-new" placeholder="New Password" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-sm text-white">
+            </div>
+            <div class="flex justify-end gap-2 pt-2">
+                <button onclick="closeChangePasswordModal()" class="px-4 py-2 bg-slate-800 text-xs rounded-xl text-slate-300">Cancel</button>
+                <button onclick="submitChangePassword()" class="px-4 py-2 bg-amber-500 text-xs font-bold rounded-xl text-brand-950">Update Password</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- RECEIPT MODAL -->
+    <div id="receipt-modal" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-sm flex items-center justify-center hidden p-4">
+        <div class="bg-white text-slate-900 rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-2xl">
+            <div class="border-b-2 border-slate-900 pb-3 text-center">
+                <h2 class="text-2xl font-black">ASIAH FOREX</h2>
+                <p class="text-xs font-bold text-amber-700">ASIAH BTE.AB.HAMID SDN BHD</p>
+                <p class="text-[10px] text-slate-500">74-1 Ground Floor, Jalan Putra, KL-50350</p>
+            </div>
+            <div id="receipt-details" class="space-y-3 text-xs"></div>
+            <div class="flex gap-2">
+                <button onclick="cancelCurrentVoucher()" class="w-1/3 bg-red-600 text-white font-bold py-2.5 rounded-xl text-xs btn-touch">Cancel</button>
+                <button onclick="window.print()" class="w-1/3 bg-slate-900 text-white font-bold py-2.5 rounded-xl text-xs btn-touch">Print Voucher</button>
+                <button onclick="closeReceiptModal()" class="w-1/3 bg-amber-500 text-brand-950 font-bold py-2.5 rounded-xl text-xs btn-touch">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Core JavaScript Engine -->
+    <script>
+        let SYSTEM_ADMIN_PASSWORD = "Ashiya@2026";
+        let MASTER_RECOVERY_PIN = "889922";
+        let activeVoucherCode = null;
+
+        let boardRates = [
+            { code: 'MYR', name: 'MALAYSIAN RINGGIT', unit: 1, flag: '🇲🇾', buy: 1.000, sell: 1.000 },
+            { code: 'USD', name: 'US DOLLAR 100/50', unit: 1, flag: '🇺🇸', buy: 4.010, sell: 4.080 },
+            { code: 'USD_OLD', name: 'US OLD NOTES', unit: 1, flag: '🇺🇸', buy: 3.600, sell: 4.080 },
+            { code: 'GBP', name: 'STERLING POUND', unit: 1, flag: '🇬🇧', buy: 5.380, sell: 5.490 },
+            { code: 'EUR', name: 'EURO', unit: 1, flag: '🇪🇺', buy: 4.470, sell: 4.560 },
+            { code: 'SGD', name: 'SINGAPORE DOLLAR', unit: 1, flag: '🇸🇬', buy: 3.150, sell: 3.210 },
+            { code: 'AUD', name: 'AUSTRALIAN DOLLAR', unit: 1, flag: '🇦🇺', buy: 2.810, sell: 2.880 },
+            { code: 'NZD', name: 'NEW ZEALAND DOLLAR', unit: 1, flag: '🇳🇿', buy: 2.250, sell: 2.340 },
+            { code: 'CAD', name: 'CANADIAN DOLLAR', unit: 1, flag: '🇨🇦', buy: 2.860, sell: 2.950 },
+            { code: 'HKD', name: 'HONG KONG DOLLAR', unit: 100, flag: '🇭🇰', buy: 51.50, sell: 52.40 },
+            { code: 'CNY', name: 'CHINESE RENMINBI', unit: 100, flag: '🇨🇳', buy: 60.50, sell: 61.80 },
+            { code: 'TWD', name: 'NEW TAIWAN DOLLAR', unit: 100, flag: '🇹🇼', buy: 12.20, sell: 12.80 },
+            { code: 'THB', name: 'THAI BAHT', unit: 100, flag: '🇹🇭', buy: 11.80, sell: 12.40 },
+            { code: 'PHP', name: 'PHILIPPINE PESO', unit: 100, flag: '🇵🇭', buy: 6.170, sell: 6.750 },
+            { code: 'INR', name: 'INDIAN RUPEE', unit: 100, flag: '🇮🇳', buy: 4.000, sell: 4.150 },
+            { code: 'SAR', name: 'SAUDI RIYAL', unit: 100, flag: '🇸🇦', buy: 105.00, sell: 111.00 },
+            { code: 'JPY', name: 'JAPANESE YEN', unit: 1000, flag: '🇯🇵', buy: 25.50, sell: 26.80 },
+            { code: 'KRW', name: 'KOREAN WON', unit: 1000, flag: '🇰🇷', buy: 2.950, sell: 3.150 },
+            { code: 'TRY', name: 'TURKISH LIRA', unit: 1, flag: '🇹🇷', buy: 0.083, sell: 0.095 },
+            { code: 'IDR', name: 'INDONESIAN RUPIAH', unit: 1000000, flag: '🇮🇩', buy: 220.00, sell: 228.00 },
+            { code: 'VND', name: 'VIETNAM DONG', unit: 1000000, flag: '🇻🇳', buy: 154.00, sell: 162.00 }
+        ];
+
+        // Clean initial state (No default receipt)
+        let ledgerOrders = [];
+
+        // Comprehensive Initial Compliance Audit Logs
+        let auditLogs = [
+            { timestamp: new Date().toISOString(), id: 'LOG-1001', type: 'SECURITY_EVENT', details: 'Counter branch application engine initialized securely.' },
+            { timestamp: new Date().toISOString(), id: 'LOG-1002', type: 'RATE_CHANGE', details: 'Board rates synchronized with Jalan Putra counter display.' }
+        ];
+
+        let isAdminAuthenticated = false;
+        let isCalculating = false;
+        let pendingTargetTab = null;
+
+        // Browser-only demo: client-side passwords are not a security boundary.
+        // Use a server-side authenticated API before handling real customer/financial data.
+        function escapeHTML(value) {
+            return String(value ?? '').replace(/[&<>"']/g, ch => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            }[ch]));
+        }
+        function logEvent(type, details) {
+            auditLogs.unshift({
+                timestamp: new Date().toISOString(),
+                id: `LOG-${crypto.randomUUID ? crypto.randomUUID() : Date.now() + '-' + Math.random().toString(16).slice(2)}`,
+                type, details
+            });
+        }
+        function getFilteredAuditLogs() {
+            const eventFilter = document.getElementById('audit-filter-event')?.value || 'ALL';
+            const startDate = document.getElementById('audit-start-date')?.value || '';
+            const endDate = document.getElementById('audit-end-date')?.value || '';
+            if (startDate && endDate && startDate > endDate) {
+                alert('Start date must be on or before the end date.');
+                return [];
+            }
+            return auditLogs.filter(log => {
+                const day = new Date(log.timestamp).toLocaleDateString('en-CA');
+                if (eventFilter !== 'ALL' && log.type !== eventFilter) return false;
+                if (startDate && day < startDate) return false;
+                if (endDate && day > endDate) return false;
+                return true;
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderTVBoard();
+            renderRateManager();
+            populateCalcDropdowns();
+            startTVClock();
+            
+            const sElem = document.getElementById('send-amount');
+            const rElem = document.getElementById('receive-amount');
+            if (sElem) adjustFontSize(sElem);
+            if (rElem) adjustFontSize(rElem);
+            calculateFromSend();
+            switchTab('tvboard');
+        });
+
+        function adjustFontSize(inputElement) {
+            if (!inputElement) return;
+            const length = inputElement.value.length;
+            if (length > 12) inputElement.style.fontSize = '1.25rem';
+            else if (length > 8) inputElement.style.fontSize = '1.5rem';
+            else if (length > 5) inputElement.style.fontSize = '1.875rem';
+            else inputElement.style.fontSize = '2.25rem';
+        }
+
+        function startTVClock() {
+            setInterval(() => {
+                const now = new Date();
+                const dStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+                const tStr = now.toLocaleTimeString('en-GB');
+                const elem = document.getElementById('tv-clock-date');
+                if (elem) elem.innerText = `${dStr}  ${tStr}`;
+            }, 1000);
+        }
+
+        function renderTVBoard() {
+            const col1 = document.getElementById('tv-grid-col1');
+            const col2 = document.getElementById('tv-grid-col2');
+            if (!col1 || !col2) return;
+
+            col1.innerHTML = '';
+            col2.innerHTML = '';
+
+            const listWithoutMYR = boardRates.filter(r => r.code !== 'MYR');
+            const half = Math.ceil(listWithoutMYR.length / 2);
+
+            listWithoutMYR.forEach((r, idx) => {
+                let unitDisplay = r.unit >= 1000000 ? '1 JUTA' : r.unit;
+                const rowHTML = `
+                    <tr class="hover:bg-blue-900/30">
+                        <td class="py-2.5 flex items-center gap-2">
+                            <span class="text-base">${r.flag}</span>
+                            <span class="text-slate-100">${r.name}</span>
+                        </td>
+                        <td class="py-2.5 text-center text-amber-400 font-bold">${unitDisplay}</td>
+                        <td class="py-2.5 text-right text-emerald-400 font-bold">${typeof r.buy === 'number' ? r.buy.toFixed(3) : r.buy}</td>
+                        <td class="py-2.5 text-right text-amber-300 font-bold">${typeof r.sell === 'number' ? r.sell.toFixed(3) : r.sell}</td>
+                    </tr>
+                `;
+                if (idx < half) col1.innerHTML += rowHTML;
+                else col2.innerHTML += rowHTML;
+            });
+        }
+
+        function renderRateManager() {
+            const tbody = document.getElementById('rate-manager-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            boardRates.filter(r => r.code !== 'MYR').forEach((r, i) => {
+                let realIdx = boardRates.findIndex(item => item.code === r.code);
+                let unitInputVal = r.unit >= 1000000 ? '1 JUTA' : r.unit;
+                tbody.innerHTML += `
+                    <tr class="hover:bg-slate-900/60">
+                        <td class="p-3 font-bold text-white flex items-center gap-2">
+                            <span>${r.flag}</span> <span>${r.name} (${r.code})</span>
+                        </td>
+                        <td class="p-3 text-center">
+                            <input type="text" id="unit-${realIdx}" value="${unitInputVal}" class="w-20 bg-slate-950 border border-slate-800 text-center rounded-xl text-amber-400 font-bold px-1 py-1">
+                        </td>
+                        <td class="p-3">
+                            <input type="number" step="any" id="buy-${realIdx}" value="${r.buy}" class="w-24 bg-slate-950 border border-slate-800 rounded-xl text-emerald-400 font-bold px-2 py-1">
+                        </td>
+                        <td class="p-3">
+                            <input type="number" step="any" id="sell-${realIdx}" value="${r.sell}" class="w-24 bg-slate-950 border border-slate-800 rounded-xl text-amber-300 font-bold px-2 py-1">
+                        </td>
+                        <td class="p-3 text-right">
+                            <button onclick="saveSingleRate(${realIdx})" class="bg-blue-900/60 hover:bg-amber-500 hover:text-brand-950 text-amber-400 text-xs px-3 py-1.5 rounded-xl font-bold btn-touch">Apply</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function saveSingleRate(i) {
+            let rawUnit = document.getElementById(`unit-${i}`).value.trim().toUpperCase();
+            const unit = rawUnit.includes('JUTA') ? 1000000 : Number(rawUnit);
+            const buy = Number(document.getElementById(`buy-${i}`).value);
+            const sell = Number(document.getElementById(`sell-${i}`).value);
+            if (!Number.isFinite(unit) || unit <= 0 || !Number.isFinite(buy) || buy <= 0 || !Number.isFinite(sell) || sell <= 0) {
+                alert('Enter a valid positive unit, buy rate, and sell rate.');
+                return;
+            }
+            boardRates[i].unit = unit;
+            boardRates[i].buy = buy;
+            boardRates[i].sell = sell;
+            
+            auditLogs.unshift({
+                timestamp: new Date().toISOString(),
+                id: `LOG-${Math.floor(1000 + Math.random() * 9000)}`,
+                type: 'RATE_CHANGE',
+                details: `Updated ${boardRates[i].code} rate: Buy ${boardRates[i].buy}, Sell ${boardRates[i].sell}`
+            });
+
+            renderTVBoard();
+            calculateFromSend();
+            alert(`Rate updated for ${boardRates[i].name}!`);
+        }
+
+        function saveAllBoardRates() {
+            boardRates.forEach((r, i) => {
+                if (r.code !== 'MYR') {
+                    let rawUnit = document.getElementById(`unit-${i}`).value.trim().toUpperCase();
+                    const unit = rawUnit.includes('JUTA') ? 1000000 : Number(rawUnit);
+                    const buy = Number(document.getElementById(`buy-${i}`).value);
+                    const sell = Number(document.getElementById(`sell-${i}`).value);
+                    if (!Number.isFinite(unit) || unit <= 0 || !Number.isFinite(buy) || buy <= 0 || !Number.isFinite(sell) || sell <= 0) {
+                        alert(`Invalid unit or rate for ${r.code}. No rates were published.`);
+                        return;
+                    }
+                    r.unit = unit;
+                    r.buy = buy;
+                    r.sell = sell;
+                }
+            });
+
+            auditLogs.unshift({
+                timestamp: new Date().toISOString(),
+                id: `LOG-${Math.floor(1000 + Math.random() * 9000)}`,
+                type: 'RATE_CHANGE',
+                details: 'Full board rate refresh saved and published to TV board.'
+            });
+
+            renderTVBoard();
+            calculateFromSend();
+            alert('All board rates saved & published to TV Screen!');
+        }
+
+        function populateCalcDropdowns() {
+            const sendSel = document.getElementById('send-currency');
+            const recSel = document.getElementById('receive-currency');
+            
+            sendSel.innerHTML = '';
+            recSel.innerHTML = '';
+
+            boardRates.forEach(r => {
+                sendSel.innerHTML += `<option value="${r.code}">${r.flag} ${r.code}</option>`;
+                recSel.innerHTML += `<option value="${r.code}">${r.flag} ${r.code}</option>`;
+            });
+
+            sendSel.value = 'MYR';
+            recSel.value = 'PHP';
+        }
+
+        function swapCurrencies() {
+            const sendSel = document.getElementById('send-currency');
+            const recSel = document.getElementById('receive-currency');
+            const temp = sendSel.value;
+            sendSel.value = recSel.value;
+            recSel.value = temp;
+            calculateFromSend();
+        }
+
+        function getConversionRates(sendCode, recCode, tradeType) {
+            const source = boardRates.find(r => r.code === sendCode);
+            const target = boardRates.find(r => r.code === recCode);
+            if (!source || !target) throw new Error('Please select valid currencies.');
+            // Rates are quoted as MYR per configured unit. In a two-sided exchange,
+            // the counter buys the source currency and sells the target (and vice versa).
+            const sourceSide = tradeType === 'WE_SELL' ? 'buy' : 'sell';
+            const targetSide = tradeType === 'WE_SELL' ? 'sell' : 'buy';
+            return { source, target, sourceRate: source[sourceSide], targetRate: target[targetSide] };
+        }
+
+        function calculateFromSend() {
+            if (isCalculating) return;
+            isCalculating = true;
+            try {
+                const sendCode = document.getElementById('send-currency').value;
+                const recCode = document.getElementById('receive-currency').value;
+                const tradeType = document.getElementById('calc-trade-type').value;
+                const raw = document.getElementById('send-amount').value;
+                const sendVal = Number(raw);
+                const { source, target, sourceRate, targetRate } = getConversionRates(sendCode, recCode, tradeType);
+                document.getElementById('base-flag').innerText = source.flag;
+                document.getElementById('target-flag').innerText = target.flag;
+                if (raw.trim() === '' || !Number.isFinite(sendVal) || sendVal < 0) {
+                    document.getElementById('receive-amount').value = '';
+                    document.getElementById('live-rate-display').innerText = 'Enter a valid amount';
+                    return;
+                }
+                const valueInMYR = sendCode === 'MYR' ? sendVal : (sendVal / source.unit) * sourceRate;
+                const result = recCode === 'MYR' ? valueInMYR : (valueInMYR / targetRate) * target.unit;
+                document.getElementById('receive-amount').value = Number.isFinite(result) ? result.toFixed(2) : '';
+                adjustFontSize(document.getElementById('receive-amount'));
+                const effectiveRate = sendCode === 'MYR'
+                    ? targetRate / target.unit
+                    : recCode === 'MYR' ? sourceRate / source.unit
+                    : (sourceRate / source.unit) / (targetRate / target.unit);
+                document.getElementById('live-rate-display').innerText =
+                    `Counter rate: ${sendCode} ${sendCode === 'MYR' ? '1' : source.unit} → ${recCode} ${Number.isFinite(effectiveRate) ? (effectiveRate * (sendCode === 'MYR' ? 1 : source.unit)).toFixed(4) : '--'} (${tradeType === 'WE_SELL' ? 'Customer buys target' : 'Customer sells target'})`;
+            } catch (error) {
+                console.error(error);
+                document.getElementById('receive-amount').value = '';
+            } finally {
+                isCalculating = false;
+            }
+        }
+
+        function calculateFromReceive() {
+            if (isCalculating) return;
+            isCalculating = true;
+            try {
+                const sendCode = document.getElementById('send-currency').value;
+                const recCode = document.getElementById('receive-currency').value;
+                const tradeType = document.getElementById('calc-trade-type').value;
+                const raw = document.getElementById('receive-amount').value;
+                const recVal = Number(raw);
+                const { source, target, sourceRate, targetRate } = getConversionRates(sendCode, recCode, tradeType);
+                if (raw.trim() === '' || !Number.isFinite(recVal) || recVal < 0) {
+                    document.getElementById('send-amount').value = '';
+                    return;
+                }
+                const requiredMYR = recCode === 'MYR' ? recVal : (recVal / target.unit) * targetRate;
+                const requiredSource = sendCode === 'MYR' ? requiredMYR : (requiredMYR / sourceRate) * source.unit;
+                document.getElementById('send-amount').value = Number.isFinite(requiredSource) ? requiredSource.toFixed(2) : '';
+                adjustFontSize(document.getElementById('send-amount'));
+            } catch (error) {
+                console.error(error);
+                document.getElementById('send-amount').value = '';
+            } finally {
+                isCalculating = false;
+            }
+        }
+
+        function switchTab(t) {
+            const allTabs = ['tvboard', 'send', 'rates', 'ledger', 'audit'];
+            if (!allTabs.includes(t)) return;
+            if (['rates', 'ledger', 'audit'].includes(t) && !isAdminAuthenticated) {
+                attemptAdminAccess(t);
+                return;
+            }
+            
+            allTabs.forEach(id => {
+                document.getElementById(`tab-${id}`).classList.add('hidden');
+                
+                const btn = document.getElementById(`nav-${id}`);
+                if (btn) {
+                    btn.className = "px-4 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-blue-900/40 transition-all btn-touch flex items-center";
+                }
+
+                const mobBtn = document.getElementById(`mob-nav-${id}`);
+                if (mobBtn) {
+                    mobBtn.className = "text-slate-400 p-2 btn-touch flex flex-col items-center";
+                }
+            });
+
+            document.getElementById(`tab-${t}`).classList.remove('hidden');
+
+            const activeBtn = document.getElementById(`nav-${t}`);
+            if (activeBtn) {
+                activeBtn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 text-brand-950 transition-all shadow-md btn-touch flex items-center";
+            }
+
+            const activeMobBtn = document.getElementById(`mob-nav-${t}`);
+            if (activeMobBtn) {
+                activeMobBtn.className = "text-amber-400 font-semibold p-2 btn-touch flex flex-col items-center";
+            }
+
+            if (t === 'ledger') renderLedger();
+            if (t === 'audit') renderAudit();
+        }
+
+        function attemptAdminAccess(t) {
+            if (isAdminAuthenticated) {
+                switchTab(t);
+            } else {
+                pendingTargetTab = t;
+                document.getElementById('admin-auth-modal').classList.remove('hidden');
+            }
+        }
+
+        function validateAdminPassword() {
+            const inputVal = document.getElementById('admin-password-input').value;
+            if (inputVal === SYSTEM_ADMIN_PASSWORD) {
+                isAdminAuthenticated = true;
+                document.getElementById('admin-status-text').innerText = 'Admin Unlocked';
+                document.getElementById('admin-status-badge').className = "text-xs bg-emerald-500/20 text-emerald-400 px-3.5 py-2 rounded-full border border-emerald-500/40 flex items-center gap-2 transition-colors btn-touch";
+                
+                auditLogs.unshift({
+                    timestamp: new Date().toISOString(),
+                    id: `LOG-${Math.floor(1000 + Math.random() * 9000)}`,
+                    type: 'SECURITY_EVENT',
+                    details: 'Admin authentication session granted.'
+                });
+
+                closeAdminAuthModal();
+                if (pendingTargetTab) switchTab(pendingTargetTab);
+            } else {
+                alert('Invalid Admin Password.');
+            }
+        }
+
+        function toggleAdminAuthModal() {
+            if (isAdminAuthenticated) {
+                isAdminAuthenticated = false;
+                document.getElementById('admin-status-text').innerText = 'Admin Login';
+                document.getElementById('admin-status-badge').className = "text-xs bg-slate-800/80 text-slate-300 hover:bg-slate-700 px-3.5 py-2 rounded-full border border-slate-700 flex items-center gap-2 transition-colors btn-touch";
+                switchTab('tvboard');
+            } else {
+                pendingTargetTab = null;
+                document.getElementById('admin-auth-modal').classList.remove('hidden');
+            }
+        }
+
+        function closeAdminAuthModal() {
+            document.getElementById('admin-auth-modal').classList.add('hidden');
+            document.getElementById('admin-password-input').value = '';
+        }
+
+        function openChangePasswordModal() {
+            document.getElementById('admin-auth-modal').classList.add('hidden');
+            document.getElementById('change-pwd-modal').classList.remove('hidden');
+        }
+
+        function closeChangePasswordModal() {
+            document.getElementById('change-pwd-modal').classList.add('hidden');
+        }
+
+        function submitChangePassword() {
+            const curr = document.getElementById('cp-current').value;
+            const newPwd = document.getElementById('cp-new').value;
+
+            if (curr === SYSTEM_ADMIN_PASSWORD) {
+                if (newPwd && newPwd.trim().length >= 6) {
+                    SYSTEM_ADMIN_PASSWORD = newPwd.trim();
+                    auditLogs.unshift({
+                        timestamp: new Date().toISOString(),
+                        id: `LOG-${Math.floor(1000 + Math.random() * 9000)}`,
+                        type: 'SECURITY_EVENT',
+                        details: 'Admin security password changed successfully.'
+                    });
+                    alert('Admin password changed successfully!');
+                    closeChangePasswordModal();
+                } else {
+                    alert('New password must be at least 6 characters long.');
+                }
+            } else {
+                alert('Current password incorrect.');
+            }
+        }
+
+        function handleForgotPassword() {
+            const pin = prompt('Enter Master Security Recovery PIN:');
+            if (pin === MASTER_RECOVERY_PIN) {
+                const tempPwd = prompt('Enter temporary new admin password (Min 6 chars):');
+                if (tempPwd && tempPwd.trim().length >= 6) {
+                    SYSTEM_ADMIN_PASSWORD = tempPwd.trim();
+                    alert('Password reset successful! You can now login with your new password.');
+                } else {
+                    alert('Invalid password format.');
+                }
+            } else if (pin !== null) {
+                alert('Incorrect Master Recovery PIN.');
+            }
+        }
+
+        function generateOrderVoucher() {
+            const sender = document.getElementById('sender-name').value.trim();
+            const recipient = document.getElementById('rec-name').value.trim();
+            const phone = document.getElementById('rec-phone').value.trim();
+            const pin = document.getElementById('mtin-pin').value.trim();
+            if (sender.length < 2 || recipient.length < 2) {
+                alert('Enter the sender and recipient full legal names.');
+                return;
+            }
+            if (!phone || !/^[+0-9() .-]{7,20}$/.test(phone)) {
+                alert('Enter a valid recipient mobile number.');
+                return;
+            }
+            if (!/^\d{6}$/.test(pin)) {
+                alert('Please enter a valid 6-digit numeric MTIN PIN.');
+                return;
+            }
+
+            const sendCode = document.getElementById('send-currency').value;
+            const recCode = document.getElementById('receive-currency').value;
+            const sendAmt = Number(document.getElementById('send-amount').value);
+            const recAmt = Number(document.getElementById('receive-amount').value);
+            if (!Number.isFinite(sendAmt) || sendAmt <= 0 || !Number.isFinite(recAmt) || recAmt <= 0) {
+                alert('Enter an amount greater than zero and check the conversion result.');
+                return;
+            }
+
+            const code = 'ASH-' + Date.now().toString(36).toUpperCase() + '-' + Math.random().toString(36).slice(2, 6).toUpperCase();
+            activeVoucherCode = code;
+
+            ledgerOrders.unshift({
+                code, sender, recipient, phone,
+                sent: `${sendCode} ${sendAmt.toFixed(2)}`,
+                rec: `${recAmt.toFixed(2)} ${recCode}`,
+                pin, mtinPin: pin, status: 'READY FOR COUNTER PICKUP'
+            });
+
+            auditLogs.unshift({
+                timestamp: new Date().toISOString(),
+                id: `LOG-${Math.floor(1000 + Math.random() * 9000)}`,
+                type: 'BOOKING_CREATED',
+                details: `Voucher ${code} created. Deposit: ${sendCode} ${sendAmt}, Payout: ${recAmt} ${recCode}`
+            });
+
+            document.getElementById('receipt-details').innerHTML = `
+                <p><strong>Order Ref:</strong> ${escapeHTML(code)}</p>
+                <p><strong>Sender:</strong> ${escapeHTML(sender)}</p>
+                <p><strong>Recipient:</strong> ${escapeHTML(recipient)} (${escapeHTML(phone)})</p>
+                <p><strong>Deposit:</strong> ${escapeHTML(sendCode)} ${sendAmt.toFixed(2)}</p>
+                <p><strong>Payout:</strong> ${recAmt.toFixed(2)} ${escapeHTML(recCode)}</p>
+                <p><strong>MTIN PIN:</strong> ${escapeHTML(pin)}</p>
+                <p class="text-[10px] text-slate-500">Keep this voucher private. Show valid identification at the counter.</p>
+            `;
+            document.getElementById('receipt-modal').classList.remove('hidden');
+        }
+
+        function cancelCurrentVoucher() {
+            if (!activeVoucherCode) return;
+            const order = ledgerOrders.find(o => o.code === activeVoucherCode);
+            if (order && order.status !== 'CANCELLED') {
+                order.status = 'CANCELLED';
+                logEvent('ORDER_CANCELLED', `Voucher ${activeVoucherCode} was marked as CANCELLED by customer.`);
+            } else if (!order) {
+                alert('This voucher could not be found.');
+                return;
+            }
+            const cancelledCode = activeVoucherCode;
+            closeReceiptModal();
+            alert(`Voucher ${cancelledCode} cancellation status: ${order.status}.`);
+        }
+
+        function closeReceiptModal() { document.getElementById('receipt-modal').classList.add('hidden'); }
+
+        function renderLedger() {
+            const tbody = document.getElementById('ledger-table-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            if (!Array.isArray(ledgerOrders) || ledgerOrders.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" class="p-6 text-center text-slate-500 font-medium">No order vouchers registered in ledger yet. Complete a customer booking first.</td></tr>`;
+                return;
+            }
+
+            ledgerOrders.forEach((o, idx) => {
+                // Support both the current and older booking property names.
+                const pickupPin = String(o.mtinPin ?? o.pin ?? o.pickupPin ?? '').trim();
+                const pinDisplay = pickupPin
+                    ? `<span class="inline-flex items-center rounded-lg border border-amber-400/40 bg-amber-400/10 px-3 py-2 text-base font-black tracking-[0.25em] text-amber-300" aria-label="MTIN pickup PIN">${escapeHTML(pickupPin)}</span>`
+                    : `<span class="text-red-300 font-semibold">Not recorded</span>`;
+
+                tbody.insertAdjacentHTML('beforeend', `
+                    <tr class="border-b border-slate-800">
+                        <td class="p-3 font-mono text-amber-400 font-bold">${escapeHTML(o.code ?? '')}</td>
+                        <td class="p-3 text-white">${escapeHTML(o.sender ?? '')}</td>
+                        <td class="p-3 text-slate-300">${escapeHTML(o.recipient ?? '')}</td>
+                        <td class="p-3 text-white font-mono">${escapeHTML(o.sent ?? '')}</td>
+                        <td class="p-3 text-emerald-400 font-mono">${escapeHTML(o.rec ?? '')}</td>
+                        <td class="p-3 min-w-[150px]">${pinDisplay}</td>
+                        <td class="p-3 font-semibold ${o.status === 'CANCELLED' ? 'text-red-400' : 'text-emerald-400'}">${escapeHTML(o.status ?? '')}</td>
+                        <td class="p-3 text-right">
+                            <button onclick="cancelLedgerOrder(${idx})" ${o.status === 'CANCELLED' ? 'disabled' : ''} class="text-red-400 hover:underline disabled:opacity-40">Cancel</button>
+                        </td>
+                    </tr>
+                `);
+            });
+        }
+
+        function cancelLedgerOrder(index) {
+            const order = ledgerOrders[index];
+            if (!order || order.status === 'CANCELLED') return;
+            if (!confirm(`Cancel voucher ${order.code}?`)) return;
+            order.status = 'CANCELLED';
+            logEvent('ORDER_CANCELLED', `Voucher ${order.code} was cancelled by administrator.`);
+            renderLedger();
+        }
+
+        // FULL COMPLIANCE AUDIT ENGINE & FILTERS
+        function renderAudit() {
+            const tbody = document.getElementById('audit-table-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            const filtered = getFilteredAuditLogs();
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-500">No compliance logs matching selected filter parameters.</td></tr>`;
+                return;
+            }
+
+            filtered.forEach(log => {
+                tbody.innerHTML += `
+                    <tr class="hover:bg-slate-900/60 border-b border-slate-800/80">
+                        <td class="p-3 text-slate-400">${escapeHTML(new Date(log.timestamp).toLocaleString('en-GB'))}</td>
+                        <td class="p-3 text-amber-400 font-bold">${escapeHTML(log.id)}</td>
+                        <td class="p-3 text-emerald-400 font-bold">${escapeHTML(log.type)}</td>
+                        <td class="p-3 text-slate-200">${escapeHTML(log.details)}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        function setAuditPeriod(period) {
+            const now = new Date();
+            let start = new Date();
+            
+            if (period === 'daily') {
+                start.setHours(0,0,0,0);
+            } else if (period === 'weekly') {
+                start.setDate(now.getDate() - 7);
+            } else if (period === 'monthly') {
+                start.setMonth(now.getMonth() - 1);
+            } else if (period === 'annual') {
+                start.setFullYear(now.getFullYear() - 1);
+            }
+
+            const localISODate = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+            document.getElementById('audit-start-date').value = localISODate(start);
+            document.getElementById('audit-end-date').value = localISODate(now);
+            renderAudit();
+        }
+
+        function resetAuditFilters() {
+            document.getElementById('audit-filter-event').value = 'ALL';
+            document.getElementById('audit-start-date').value = '';
+            document.getElementById('audit-end-date').value = '';
+            renderAudit();
+        }
+
+        function printAuditSummaryReport() { window.print(); }
+
+        function exportAuditReportPDF() { window.print(); }
+
+        function exportAuditCSV() {
+            let csvContent = "data:text/csv;charset=utf-8,Timestamp,Log ID,Event Type,Details\n";
+            auditLogs.forEach(l => {
+                csvContent += `"${l.timestamp}","${l.id}","${l.type}","${l.details}"\n`;
+            });
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `ASIAH_FOREX_Compliance_Audit_${new Date().toISOString().split('T')[0]}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
